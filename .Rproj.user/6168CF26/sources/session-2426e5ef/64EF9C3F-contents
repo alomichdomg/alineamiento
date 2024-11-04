@@ -1,0 +1,50 @@
+###5.- ALINEAMIENTO MULTIPLE###
+install.packages("phangorn")
+installed.packages("phytools")
+library(BiocManager)
+library(BiocVersion)
+library(Biobase)
+library(Biostrings)
+library(msa)
+library(BSgenome)
+library (BiocIO)
+library(BSgenome.Ecoli.NCBI.20080805)
+library(ape)
+library(phangorn)
+#Elabora un programa en R que a partir de un archivo FASTA concatenado de secuencias
+#que se anexa a esta actividad haga lo siguiente:
+#  (a) El n ́umero de veces que aparece la secuencia GATTACA
+#(b) La secuencia traducida
+#(c) El alineamiento m ́ultiple por al menos dos algoritmos distintos para la secuencia de
+#AA
+#(d) Una matriz de distancias de las secuencias
+#(e) Un  ́arbol filogen ́etico a partir de uno de los alineamientos
+gattaca_fasta <- readDNAStringSet("DATOS/FASTA.fa")
+gattaca_fasta
+length(gattaca_fasta)
+#NUMERO DE VECES QUE APARECE LA SECUENCIA EN EL ARCHIVO.
+vcountPattern("GATTACA", gattaca_fasta) 
+#TRADUCIR LA SECUENCIA.
+alphabetFrequency(gattaca_fasta) 
+gattaca_traducido <- translate(gattaca_fasta, if.fuzzy.codon="error.if.X") #NO FUNCIONA POR LA POSICION 28 DE LA SECUENCIA 
+#como salia un error, use la ayuda de la funcion para ver que hacer con el error
+gattaca_traducido
+gattaca_modificado <- gsub("\\*", "-", gattaca_traducido) #se eliminan los * para utilizar la funcion msa
+gattaca_amino <- AAStringSet(gattaca_modificado) #para que funcione otra vez el alineamiento se tiene que leer como AA
+#alineamientos:
+alineamiento_1_ <- msa(gattaca_amino, "ClustalW")
+print(alineamiento_1_, show="complete")
+alineamiento_2_ <- msa (gattaca_amino, "Muscle")
+print(alineamiento_2_, show="complete")
+
+#MATRIZ DE DISTANCIA Y ABROL
+gattaca_caracter <- as.character(gattaca_fasta)#para que reconozca las secuencias, esto mete muchas NA
+matrizdistancias <- dist(gattaca_caracter, method = "binary")
+matrizdistancias[is.na(matrizdistancias)] <- 0
+
+#se le tienen que quitar las na
+#esto lo encontre en un foro.
+arbol_1 <-  phangorn::upgma(matrizdistancias)
+plot(arbol_1)
+#NOTA: para poder elaborar esta tarea busque en internet en esta pagina:
+#https://rpubs.com/maguacanemem/770126 esto para la parte del arbol.
