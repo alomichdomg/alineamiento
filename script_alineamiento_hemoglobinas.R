@@ -49,7 +49,8 @@ arbol_2 <- phangorn::upgma(matriz_dist_2)
 plot(arbol_2)
 dev.off()
 
-########################################3
+#######################################
+#Arbol con 
 class(alineamiento_hemo)
 distancia_1 <- dist.alignment(alineamiento_hemo, "identity")
 as.matrix(distancia_1)[2:5, "HBA1_Homo_sapiens", drop=FALSE]
@@ -57,5 +58,6 @@ as.matrix(distancia_1)[2:5, "HBA1_Homo_sapiens", drop=FALSE]
 hemoTree <- nj(distancia_1)
 plot(hemoTree)
 
+##### Arbol con ggtree: solo del primer alineamiento. 
 p1 <- ggtree(arbol_1)
 plot(p1)
