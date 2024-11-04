@@ -53,7 +53,7 @@ dev.off()
 #Intento de arbol utilizando el msa
 class(alineamiento_hemo)
 distancia_1 <- dist.alignment(alineamiento_hemo, "identity")
-as.matrix(distancia_1)[2:5, "HBA1_Homo_sapiens", drop=FALSE]
+as.matrix(distancia_1)
 
 hemoTree <- nj(distancia_1)
 plot(hemoTree)
