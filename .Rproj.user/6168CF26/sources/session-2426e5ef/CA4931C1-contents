@@ -1,12 +1,14 @@
 library("msa")
 library("BSgenome")
 library("ggmsa")
-browseVignettes("ggmsa")
+browseVignettes("msa")
 library(ape)
 install.packages("phangorn")
 library(phangorn)
 install.packages("phytools")
 library(phytools)
+install.packages("seqinr")
+library(seqinr)
 
 #Utilizar varias secuencias descargadas y hacer alineamientos de dos tipos y un arbol
 hemoglobinas <- readAAStringSet("Datos/DivergentGlobins.fasta")
@@ -23,7 +25,7 @@ ggmsa(hemoglobinas)
 #ggmsa graficas del alineamiento.
 
 
-##arbol filogenetico:
+##arbol filogenetico con el metodo UPGMA
 #primer calculo de los alineamientos.
 matriz_dist <- ape::as.AAbin(alineamiento_hemo)
 matriz_dist <- ape::dist.aa(matriz_dist)
@@ -38,3 +40,12 @@ plot(arbol_1)
 
 arbol_2 <- phangorn::upgma(matriz_dist_2)
 plot(arbol_2)
+####################################
+class(alineamiento_hemo)
+distancia_1 <- dist.alignment(alineamiento_hemo, "identity")
+as.matrix(distancia_1)[2:5, "HBA1_Homo_sapiens", drop=FALSE]
+
+hemoTree <- nj(distancia_1)
+plot(hemoTree)
+
+
