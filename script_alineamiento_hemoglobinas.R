@@ -35,15 +35,15 @@ matriz_dist_2 <- ape::as.AAbin(alineamiento_hemo2)
 matriz_dist_2 <- ape::dist.aa(matriz_dist_2)
 matriz_dist_2
 
-pdf("RESULTADOS/Arbol alineamiento 1. Metodo UPGMA")
+pdf("RESULTADOS/Arbol alineamiento 1. Metodo UPGMA.pdf")
 arbol_1 <- phangorn::upgma(matriz_dist)
 plot(arbol_1)
 dev.off()
 
-pdf("RESULTADOS/Arbol alineamiento 2 Metodo UPGMA")
+pdf("RESULTADOS/Arbol alineamiento 2 Metodo UPGMA.pdf")
 arbol_2 <- phangorn::upgma(matriz_dist_2)
 plot(arbol_2)
-
+dev.off()
 
 ####################################
 class(alineamiento_hemo)
