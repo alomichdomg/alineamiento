@@ -1,0 +1,19 @@
+library("msa")
+library("BSgenome")
+library("ggmsa")
+
+#Utilizar varias secuencias descargadas y hacer alineamientos de dos tipos y un arbol
+hemoglobinas <- readAAStringSet("Datos/DivergentGlobins.fasta")
+print(hemoglobinas)
+
+alineamiento_hemo <- msa (hemoglobinas, "Muscle")
+print(alineamiento_hemo, show = "complete")
+
+alineamiento_hemo2 <- msa(hemoglobinas, "ClustalW")
+print(alineamiento_hemo2, show = "complete")
+
+#ggmsa graficas del alineamiento.
+
+
+
+#ggmsa el arbol
