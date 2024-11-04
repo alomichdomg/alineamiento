@@ -21,6 +21,7 @@ pdf("RESULTADOS/Boxplot nucelotidos.pdf")
 nucleotido <- archivo_anotacion$Stop-archivo_anotacion$Start
 boxplot(nucleotido, col = "orange")
 dev.off()
+
 #lengh aa
 pdf("RESULTADOS/Boxplot aminoacidos.pdf")
 amino <- archivo_anotacion$Length
