@@ -58,6 +58,8 @@ as.matrix(distancia_1)
 hemoTree <- nj(distancia_1)
 plot(hemoTree)
 
-##### Arbol con ggtree: solo del primer alineamiento. 
+##### Arbol con ggtree: solo del primer alineamiento.
+pdf("RESULTADOS/Arbol alineamiento 1 Metodo ggtree.pdf")
 p1 <- ggtree(arbol_1)
 plot(p1)
+dev.off()
