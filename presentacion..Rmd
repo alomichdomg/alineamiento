@@ -14,9 +14,48 @@ knitr::opts_chunk$set(echo = FALSE)
 Aqui se presenta la imagen del arbol que se realizo.  
 Para este arbol se uso la secuencias de las hemoglobinas.
 
+
+```{r librerias, message=FALSE, warning=FALSE}
+library(ggtree)
+library(ape)
+library(phytools)
+library("BSgenome")
+library(msa)
+```
+
+## el primer arbol.
+
+```{r arbol 1, message=FALSE, warning=FALSE}
+hemoglobinas <- readAAStringSet("Datos/DivergentGlobins.fasta")
+alineamiento_hemo <- msa (hemoglobinas, "Muscle")
+matriz_dist <- ape::as.AAbin(alineamiento_hemo)
+matriz_dist <- ape::dist.aa(matriz_dist)
+matriz_dist
+arbol_1 <- phangorn::upgma(matriz_dist)
+```
+
+```{r}
+plot(arbol_1)
+```
+
+
+##Codigo del arbol.
+```{r arbol codigo}
+arbol <- ggtree(arbol_1, layout="slanted")+
+  geom_treescale(linesize = 2, )+ #grosor de la linea/editar la linea
+  geom_tiplab(size = 3, color = "purple")+
+  geom_highlight(node = 1:2, color = "orange", fill="orange")+
+  geom_point2(aes(subset=node==1), color='darkorange', size=3)+
+  geom_point2(aes(subset=node==2), color='darkorange', size=3)+
+  geom_highlight(node = 4:5, color = "green", fill="green")+
+  geom_highlight(node = 3, color = "pink", fill="pink")+
+  geom_point2(aes(subset=node==3), color='red', size=3)+
+  geom_point2(aes(subset=node==4), color='darkgreen', size=3)+
+  geom_point2(aes(subset=node==5), color='darkgreen', size=3)
+```
+
 ## Imagen del arbol
 
 ```{r arbol}
 plot(arbol)
 ```
-
