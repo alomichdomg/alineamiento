@@ -44,6 +44,8 @@ arbol_1 <- phangorn::upgma(matriz_dist)
 plot(arbol_1)
 dev.off()
 
+arbol_1
+
 pdf("RESULTADOS/Arbol alineamiento 2 Metodo UPGMA.pdf")
 arbol_2 <- phangorn::upgma(matriz_dist_2)
 plot(arbol_2)

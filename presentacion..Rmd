@@ -1,0 +1,22 @@
+---
+title: "presentacion"
+author: "Alondra Dominguez"
+date: "2024-11-06"
+output: ioslides_presentation
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+## Presentacion del arbol.
+
+Aqui se presenta la imagen del arbol que se realizo.  
+Para este arbol se uso la secuencias de las hemoglobinas.
+
+## Imagen del arbol
+
+```{r arbol}
+plot(arbol)
+```
+
